@@ -4,9 +4,6 @@ MAINTAINER binhex
 # additional files
 ##################
 
-# add supervisor file for application
-ADD *.conf /etc/supervisor/conf.d/
-
 # add install bash script
 ADD install.sh /root/install.sh
 
@@ -23,8 +20,16 @@ ADD setup.sh /home/nobody/setup.sh
 RUN chmod +x /root/*.sh /home/nobody/*.sh && \
 	/bin/bash /root/install.sh
 
+# rar2fs setup
+##############
+ADD rar2fs.sh /home/nobody/rar2fs.sh
+RUN chmod +x /home/nobody/*.sh
+
 # docker settings
 #################
+
+# add supervisor file for application
+ADD *.conf /etc/supervisor/conf.d/
 
 # map /config to host defined config path (used to store configuration from app)
 VOLUME /config
