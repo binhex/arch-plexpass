@@ -1,5 +1,5 @@
 FROM binhex/arch-base:2015080700
-MAINTAINER binhex
+MAINTAINER behinddesign
 
 # additional files
 ##################
