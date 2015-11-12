@@ -4,7 +4,7 @@
 set -e
 
 # install pre-reqs
-pacman -Sy --noconfirm
+pacman -Syu --ignore filesystem --noconfirm
 
 # call aur packer script
 source /root/packer.sh
