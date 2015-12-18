@@ -19,8 +19,7 @@ docker run -d
 	-v <path for config files>:/config \
 	-v /etc/localtime:/etc/localtime:ro \
 	binhex/arch-couchpotato
-```
-  
+```  
 Please replace all user variables in the above command defined by <> with the correct values.
 
 **Access application**
@@ -36,8 +35,7 @@ docker run -d
 	-v /apps/docker/plexpass:/config \
 	-v /etc/localtime:/etc/localtime:ro \
 	binhex/arch-plexpass
-```
-  
+```  
 **Notes**
 
 N/A
