@@ -4,40 +4,43 @@
 
 **Application description**
 
-Plex is a centralized home media playback system with a powerful central server–the Plex Media Server–that streams its media to many Plex player Apps. The Server is available on many platforms like Windows, OS X, and many flavors of Linux, as well as many NAS devices like ReadyNAS or Synology.
+The Plex Media Server enriches your life by organizing all your personal media, presenting it beautifully and streaming it to all of your devices. It's easy to use, it's awesome, and it's free![
 
 **Build notes**
 
-Latest stable release from Arch Linux User Repository (AUR) using Packer to compile.
+Latest stable Plex Media Server (Plex Pass) release from Arch Linux AUR using Packer to compile.
 
 **Usage**
 ```
-docker run -d 
-	--net="host"
+docker run -d \
+	--net="host" \
 	--name=<container name> \
 	-v <path for media files>:/media \
 	-v <path for config files>:/config \
 	-v /etc/localtime:/etc/localtime:ro \
-	binhex/arch-couchpotato
-```  
+	binhex/arch-plex
+
+```
+
 Please replace all user variables in the above command defined by <> with the correct values.
 
 **Access application**
 
-http://<host ip>:32400/web
+`http://<host ip>:32400/web`
 
 **Example**
 ```
-docker run -d 
-	--net="host"
-	--name=plexpass \
+docker run -d \
+	--net="host" \
+	--name=plex \
 	-v /media/movies:/media \
-	-v /apps/docker/plexpass:/config \
+	-v /apps/docker/plex:/config \
 	-v /etc/localtime:/etc/localtime:ro \
-	binhex/arch-plexpass
-```  
+	binhex/arch-plex
+```
+
 **Notes**
 
-N/A
+You cannot specify the port the docker container uses, it requires full access to the hosts nic and thus the -p flag is not used.
 
 [Support forum](http://lime-technology.com/forum/index.php?topic=38055.0)
