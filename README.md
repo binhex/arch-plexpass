@@ -43,4 +43,4 @@ docker run -d \
 
 You cannot specify the port the docker container uses, it requires full access to the hosts nic and thus the -p flag is not used.
 
-[Support forum](http://lime-technology.com/forum/index.php?topic=38055.0)
+[Support forum](http://lime-technology.com/forum/index.php?topic=45845.0)
