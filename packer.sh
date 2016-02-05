@@ -4,7 +4,7 @@
 set -e
 
 # define pacman packages
-pacman_packages="base-devel"
+pacman_packages="base-devel systemd"
 
 # define packer packages
 packer_packages="plex-media-server-plexpass"
@@ -30,7 +30,7 @@ pacman -U /home/makepkg-user/packer/packer*.tar.xz --noconfirm
 su -c "packer -S $packer_packages --noconfirm" - makepkg-user
 
 # remove base devel tools and packer
-pacman -Ru base-devel git --noconfirm
+pacman -Ru base-devel git systemd --noconfirm
 
 # delete makepkg-user account
 userdel -r makepkg-user
