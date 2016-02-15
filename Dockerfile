@@ -5,16 +5,16 @@ MAINTAINER binhex
 ##################
 
 # add supervisor file for application
-ADD *.conf /etc/supervisor/conf.d/
+ADD setup/*.conf /etc/supervisor/conf.d/
 
 # add install bash script
-ADD install.sh /root/install.sh
+ADD setup/install.sh /root/install.sh
 
 # add packer bash script
-ADD packer.sh /root/packer.sh
+ADD setup/packer.sh /root/packer.sh
 
 # add custom environment file for application
-ADD setup.sh /home/nobody/setup.sh
+ADD setup/setup.sh /home/nobody/setup.sh
 
 # install app
 #############
@@ -32,8 +32,8 @@ VOLUME /config
 # map /media to host defined media path (used to read/write to media library)
 VOLUME /media
 
-# run supervisor
-################
+# set permissions
+#################
 
-# run supervisor
-CMD ["supervisord", "-c", "/etc/supervisor.conf", "-n"]
+# run script to set uid, gid and permissions
+CMD ["/bin/bash", "/root/init.sh"]
