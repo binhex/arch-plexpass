@@ -13,6 +13,9 @@ ADD setup/install.sh /root/install.sh
 # add packer bash script
 ADD setup/packer.sh /root/packer.sh
 
+# add bash scripts to set uid and gid and then set permissions
+ADD setup/init.sh /root/init.sh
+
 # add custom environment file for application
 ADD setup/setup.sh /home/nobody/setup.sh
 
