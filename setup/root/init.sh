@@ -38,8 +38,8 @@ else
 fi
 
 # set permissions inside container
-chown -R "${UID}":"${GID}" /var/lib/plex /etc/conf.d/plexmediaserver /opt/plexmediaserver/ && \
-chmod -R 775 /var/lib/plex /etc/conf.d/plexmediaserver /opt/plexmediaserver/ && \
+chown -R "${UID}":"${GID}" /var/lib/plex /etc/conf.d/plexmediaserver /opt/plexmediaserver/ /home/nobody
+chmod -R 775 /var/lib/plex /etc/conf.d/plexmediaserver /opt/plexmediaserver/ /home/nobody
 
 echo "[info] Starting Supervisor..."
 
