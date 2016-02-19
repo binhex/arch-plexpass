@@ -3,9 +3,6 @@
 # exit script if return code != 0
 set -e
 
-# install pre-reqs
-pacman -Syu --ignore filesystem --noconfirm
-
 # call aur packer script
 source /root/packer.sh
 
