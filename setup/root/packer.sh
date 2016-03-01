@@ -18,7 +18,8 @@ echo -e "makepkg-password\nmakepkg-password" | passwd makepkg-user
 echo "makepkg-user ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 # download packer
-curl -o /home/makepkg-user/packer.tar.gz https://aur.archlinux.org/cgit/aur.git/snapshot/packer.tar.gz
+# curl -o /home/makepkg-user/packer.tar.gz https://aur.archlinux.org/cgit/aur.git/snapshot/packer.tar.gz
+curl -o /home/makepkg-user/packer.tar.gz https://github.com/binhex/arch-packages/raw/master/source/packer.tar.gz
 cd /home/makepkg-user
 su -c "tar -xvf packer.tar.gz" - makepkg-user
 
