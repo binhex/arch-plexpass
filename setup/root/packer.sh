@@ -19,13 +19,13 @@ echo "makepkg-user ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 # download packer
 # curl -o /home/makepkg-user/packer.tar.gz https://aur.archlinux.org/cgit/aur.git/snapshot/packer.tar.gz
-curl -L -o /home/makepkg-user/packer.tar.gz https://github.com/binhex/arch-packages/raw/master/source/packer.tar.gz
-cd /home/makepkg-user
-su -c "tar -xvf packer.tar.gz" - makepkg-user
+curl -L -o /home/makepkg-user/packer-20160301-1-any.pkg.tar.xz https://github.com/binhex/arch-packages/raw/master/compiled/packer-20160301-1-any.pkg.tar.xz
+# cd /home/makepkg-user
+# su -c "tar -xvf packer.tar.gz" - makepkg-user
 
 # install packer
-su -c "cd /home/makepkg-user/packer && makepkg -s --noconfirm --needed" - makepkg-user
-pacman -U /home/makepkg-user/packer/packer*.tar.xz --noconfirm
+# su -c "cd /home/makepkg-user/packer && makepkg -s --noconfirm --needed" - makepkg-user
+pacman -U /home/makepkg-user/packer*.tar.xz --noconfirm
 
 # install app using packer
 su -c "packer -S $packer_packages --noconfirm" - makepkg-user
