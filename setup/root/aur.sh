@@ -21,8 +21,8 @@ echo -e "makepkg-password\nmakepkg-password" | passwd makepkg-user
 echo "makepkg-user ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 # download aur helper (patched version for rpc v5)
-curl -L -o "/usr/bin/$aur_helper" "https://github.com/binhex/arch-patches/raw/master/arch-packer/$aur_packages"
-chmod a+x "/usr/bin/$aur_packages"
+curl -L -o "/usr/bin/$aur_helper" "https://github.com/binhex/arch-patches/raw/master/arch-packer/$aur_helper"
+chmod a+x "/usr/bin/$aur_helper"
 
 # download aur helper
 # curl -L -o "/home/makepkg-user/$aur_helper.tar.gz" "https://aur.archlinux.org/cgit/aur.git/snapshot/$aur_helper.tar.gz"
