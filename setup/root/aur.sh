@@ -7,7 +7,7 @@ set -e
 aur_helper="packer"
 
 # define pacman packages
-pacman_packages="base-devel systemd jshon"
+pacman_packages="base-devel systemd jshon git"
 
 # define packer packages
 aur_packages="plex-media-server-plexpass"
@@ -21,8 +21,8 @@ echo -e "makepkg-password\nmakepkg-password" | passwd makepkg-user
 echo "makepkg-user ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 # download aur helper
-curl -L -o "/usr/bin/$aur_helper" https://github.com/binhex/arch-patches/raw/master/arch-packer/packer
-chmod a+x /usr/bin/packer
+curl -L -o "/usr/bin/$aur_helper" "https://github.com/binhex/arch-patches/raw/master/arch-packer/$aur_packages"
+chmod a+x "/usr/bin/$aur_packages"
 
 # install app using aur helper
 su -c "$aur_helper -S $aur_packages --noconfirm" - makepkg-user
