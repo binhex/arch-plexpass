@@ -3,8 +3,8 @@
 # exit script if return code != 0
 set -e
 
-# call aur packer script
-source /root/packer.sh
+# call aur install script
+source /root/aur.sh
 
 # cleanup
 yes|pacman -Scc
