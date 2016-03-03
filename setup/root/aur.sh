@@ -7,7 +7,7 @@ set -e
 aur_helper="packer"
 
 # define pacman packages
-pacman_packages="base-devel systemd jshon git"
+pacman_packages="base-devel systemd git"
 
 # define packer packages
 aur_packages="plex-media-server-plexpass"
@@ -23,6 +23,7 @@ echo "makepkg-user ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 # download aur helper (patched version for rpc v5)
 curl -L -o "/usr/bin/$aur_helper" "https://github.com/binhex/arch-patches/raw/master/arch-packer/$aur_helper"
 chmod a+x "/usr/bin/$aur_helper"
+pacman -S --needed jshon --noconfirm
 
 # download aur helper
 # curl -L -o "/home/makepkg-user/$aur_helper.tar.gz" "https://aur.archlinux.org/cgit/aur.git/snapshot/$aur_helper.tar.gz"
@@ -36,8 +37,11 @@ chmod a+x "/usr/bin/$aur_helper"
 # install app using aur helper
 su -c "$aur_helper -S $aur_packages --noconfirm" - makepkg-user
 
-# remove base devel tools
-pacman -Ru base-devel git --noconfirm
+# remove base devel excluding pacman (holdpkg)
+pacman -Ru $(pacman -Qgq base-devel | grep -v pacman) --noconfirm
 
-# delete makepkg-user account
+# remove git
+pacman -Ru git --noconfirm
+
+# remove makepkg-user account
 userdel -r makepkg-user
