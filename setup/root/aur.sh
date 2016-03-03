@@ -4,7 +4,7 @@
 set -e
 
 # define aur helper
-aur_helper="apacman"
+aur_helper="pacaur"
 
 # define pacman packages
 pacman_packages="base-devel systemd"
