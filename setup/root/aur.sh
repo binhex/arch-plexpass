@@ -4,10 +4,10 @@
 set -e
 
 # define aur helper
-aur_helper="pacaur"
+aur_helper="packer"
 
 # define pacman packages
-pacman_packages="base-devel systemd"
+pacman_packages="base-devel systemd jshon"
 
 # define packer packages
 packer_packages="plex-media-server-plexpass"
@@ -21,13 +21,8 @@ echo -e "makepkg-password\nmakepkg-password" | passwd makepkg-user
 echo "makepkg-user ALL=(ALL) NOPASSWD: ALL" | (EDITOR="tee -a" visudo)
 
 # download aur helper
-curl -o "/home/makepkg-user/$aur_helper.tar.gz" "https://aur.archlinux.org/cgit/aur.git/snapshot/$aur_helper.tar.gz"
-cd /home/makepkg-user
-su -c "tar -xvf $aur_helper.tar.gz" - makepkg-user
-
-# install aur helper
-su -c "cd /home/makepkg-user/$aur_helper && makepkg -s --noconfirm --needed" - makepkg-user
-pacman -U "/home/makepkg-user/$aur_helper/$aur_helper*.tar.xz" --noconfirm
+curl -L -o "/usr/bin/$aur_helper.sh" https://github.com/binhex/arch-patches/raw/master/arch-packer/packer.sh
+chmod a+x /usr/bin/packer.sh
 
 # install app using aur helper
 su -c "$aur_helper -S $aur_packages --noconfirm" - makepkg-user
