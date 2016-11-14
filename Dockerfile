@@ -10,6 +10,9 @@ ADD setup/*.conf /etc/supervisor/conf.d/
 # add install bash script
 ADD setup/root/*.sh /root/
 
+# add packer bash script
+ADD setup/init.sh /root/init.sh
+
 # add custom environment file for application
 ADD setup/nobody/*.sh /home/nobody/
 
