@@ -19,7 +19,7 @@ find /tmp/scripts-master/ -type f -name '*.sh' -exec mv -i {} /root/  \;
 ####
 
 # define pacman packages
-pacman_packages="base-devel git systemd"
+pacman_packages="git systemd"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
