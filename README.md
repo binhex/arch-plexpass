@@ -8,7 +8,7 @@ The Plex Media Server enriches your life by organizing all your personal media, 
 
 **Build notes**
 
-Latest stable Plex Media Server (Plex Pass) release from Arch Linux AUR using Packer to compile.
+Latest stable Plex Media Server (Plex Pass) release from Arch Linux AUR.
 
 **Usage**
 ```
