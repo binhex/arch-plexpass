@@ -38,9 +38,6 @@ source /root/aor.sh
 # aur packages
 ####
 
-# define aur helper
-aur_helper="apacman"
-
 # define aur packages
 aur_packages="plex-media-server-plexpass"
 
