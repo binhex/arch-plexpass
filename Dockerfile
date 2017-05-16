@@ -5,13 +5,13 @@ MAINTAINER binhex
 ##################
 
 # add supervisor file for application
-ADD setup/*.conf /etc/supervisor/conf.d/
+ADD build/*.conf /etc/supervisor/conf.d/
 
 # add install bash script
-ADD setup/root/*.sh /root/
+ADD build/*/root/*.sh /root/
 
-# add custom environment file for application
-ADD setup/nobody/*.sh /home/nobody/
+# add run bash script
+ADD run/nobody/*.sh /home/nobody/
 
 # install app
 #############
