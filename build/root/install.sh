@@ -66,7 +66,7 @@ rm /tmp/permissions_heredoc
 ####
 
 cat <<'EOF' > /tmp/envvars_heredoc
-export TRANS_DIR=$(echo "${TRANS_DIR}" | sed -e 's/^[ \t]*//')
+export TRANS_DIR=$(echo "${TRANS_DIR}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 if [[ ! -z "${TRANS_DIR}" ]]; then
 	echo "[info] TRANS_DIR defined as '${TRANS_DIR}'" | ts '%Y-%m-%d %H:%M:%.S'
 else
