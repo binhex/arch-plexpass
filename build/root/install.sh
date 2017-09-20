@@ -39,7 +39,7 @@ source /root/aor.sh
 ####
 
 # define aur packages
-aur_packages="plex-media-server-plexpass"
+aur_packages="plex-media-server-plexpass ffmpeg-headless"
 
 # call aur install script (arch user repo)
 source /root/aur.sh
