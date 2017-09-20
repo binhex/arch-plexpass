@@ -19,7 +19,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 ####
 
 # define pacman packages
-pacman_packages="git systemd"
+pacman_packages="git systemd libx264"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
