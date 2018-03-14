@@ -47,11 +47,27 @@ source /root/aur.sh
 # container perms
 ####
 
+# define comma separated list of paths 
+install_paths="/usr/lib/plexmediaserver"
+
+# split comma separated string into list for install paths
+IFS=',' read -ra install_paths_list <<< "${install_paths}"
+
+# process install paths in the list
+for i in "${install_paths_list[@]}"; do
+
+	# confirm path(s) exist, if not then exit
+	if [[ ! -d "${i}" ]]; then
+		echo "[crit] Path '${i}' does not exist, exiting build process..." ; exit 1
+	fi
+
+done
+
 # create file with contets of here doc
 cat <<'EOF' > /tmp/permissions_heredoc
 # set permissions inside container
-chown -R "${PUID}":"${PGID}" /etc/conf.d/plexmediaserver /opt/plexmediaserver/ /home/nobody
-chmod -R 775 /etc/conf.d/plexmediaserver /opt/plexmediaserver/ /home/nobody
+chown -R "${PUID}":"${PGID}" /usr/lib/plexmediaserver/ /home/nobody
+chmod -R 775 /usr/lib/plexmediaserver/ /home/nobody
 
 EOF
 
