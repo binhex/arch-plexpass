@@ -48,7 +48,7 @@ source /root/aur.sh
 ####
 
 # define comma separated list of paths 
-install_paths="/usr/lib/plexmediaserver"
+install_paths="/usr/lib/plexmediaserver,/home/nobody"
 
 # split comma separated string into list for install paths
 IFS=',' read -ra install_paths_list <<< "${install_paths}"
@@ -63,11 +63,16 @@ for i in "${install_paths_list[@]}"; do
 
 done
 
-# create file with contets of here doc
-cat <<'EOF' > /tmp/permissions_heredoc
+# convert comma separated string of install paths to space separated, required for chmod/chown processing
+install_paths=$(echo "${install_paths}" | tr ',' ' ')
+
+# create file with contents of here doc, note EOF is NOT quoted to allow us to expand current variable 'install_paths'
+# we use escaping to prevent variable expansion for PUID and PGID, as we want these expanded at runtime of init.sh
+# note - do NOT double quote variable for install_paths otherwise this will wrap space separated paths as a single string
+cat <<EOF > /tmp/permissions_heredoc
 # set permissions inside container
-chown -R "${PUID}":"${PGID}" /usr/lib/plexmediaserver/ /home/nobody
-chmod -R 775 /usr/lib/plexmediaserver/ /home/nobody
+chown -R "\${PUID}":"\${PGID}" ${install_paths}
+chmod -R 775 ${install_paths}
 
 EOF
 
