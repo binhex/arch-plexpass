@@ -13,7 +13,7 @@ curl --connect-timeout 5 --max-time 600 --retry 5 --retry-delay 0 --retry-max-ti
 unzip /tmp/scripts-master.zip -d /tmp
 
 # move shell scripts to /root
-mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
+mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 
 # pacman packages
 ####
@@ -33,7 +33,7 @@ fi
 aur_packages="plex-media-server-plexpass"
 
 # call aur install script (arch user repo)
-source /root/aur.sh
+source aur.sh
 
 # container perms
 ####
@@ -87,7 +87,7 @@ EOF
 sed -i '/# PERMISSIONS_PLACEHOLDER/{
     s/# PERMISSIONS_PLACEHOLDER//g
     r /tmp/permissions_heredoc
-}' /root/init.sh
+}' init.sh
 rm /tmp/permissions_heredoc
 
 # env vars
@@ -110,7 +110,7 @@ EOF
 sed -i '/# ENVVARS_PLACEHOLDER/{
     s/# ENVVARS_PLACEHOLDER//g
     r /tmp/envvars_heredoc
-}' /root/init.sh
+}' init.sh
 rm /tmp/envvars_heredoc
 
 # cleanup
