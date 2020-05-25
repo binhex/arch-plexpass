@@ -35,7 +35,7 @@ fi
 ####
 
 # define pacman packages
-pacman_packages="git systemd libx264 libvpx openjpeg ffmpeg libxslt"
+pacman_packages="git systemd libx264 libvpx ffmpeg libxslt"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
