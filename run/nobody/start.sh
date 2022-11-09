@@ -30,4 +30,4 @@ export LD_LIBRARY_PATH="${PLEX_MEDIA_SERVER_HOME}"
 export HOME='/config'
 
 # kick off main process
-exec "${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
+"${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
