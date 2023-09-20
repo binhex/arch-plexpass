@@ -3,8 +3,21 @@
 # exit script if return code != 0
 set -e
 
-# release tag name from build arg, stripped of build ver using string manipulation
+# release tag name from buildx arg, stripped of build ver using string manipulation
 RELEASETAG="${1//-[0-9][0-9]/}"
+
+# target arch from buildx arg
+TARGETARCH="${2}"
+
+if [[ -z "${RELEASETAG}" ]]; then
+	echo "[warn] Release tag name from build arg is empty, exiting script..."
+	exit 1
+fi
+
+if [[ -z "${TARGETARCH}" ]]; then
+	echo "[warn] Target architecture name from build arg is empty, exiting script..."
+	exit 1
+fi
 
 # build scripts
 ####
@@ -18,11 +31,6 @@ unzip /tmp/scripts-master.zip -d /tmp
 # move shell scripts to /root
 mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 
-# detect image arch
-####
-
-# get target arch from Dockerfile argument
-TARGETARCH="${2}"
 
 # pacman packages
 ####
