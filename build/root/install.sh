@@ -55,6 +55,12 @@ aur_packages="plex-media-server-plexpass"
 # call aur install script (arch user repo)
 source aur.sh
 
+# github
+####
+
+# download ChuckPA's Plex db repair script
+github.sh --install-path '/usr/local/bin' --github-owner 'ChuckPa' --github-repo 'DBRepair' --download-assets '.*sh$' --query-type 'release' && chmod +x /usr/local/bin/dbrepair.sh
+
 # container perms
 ####
 
