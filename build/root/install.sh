@@ -59,7 +59,7 @@ source aur.sh
 ####
 
 # download ChuckPA's Plex db repair script
-github.sh --install-path '/usr/local/bin' --github-owner 'ChuckPa' --github-repo 'DBRepair' --download-assets '.*sh$' --query-type 'release' && chmod +x /usr/local/bin/dbrepair.sh
+github.sh --install-path '/usr/local/bin' --github-owner 'ChuckPa' --github-repo 'DBRepair' --download-assets '.*sh$' --query-type 'release' && chmod +x /usr/local/bin/*.sh
 
 # container perms
 ####
