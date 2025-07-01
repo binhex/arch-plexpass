@@ -16,7 +16,6 @@ Latest stable Plex Media Server (Plex Pass) release from Arch Linux AUR.
 
 ```bash
 docker run -d \
-
     --net="host" \
     --name=<container name> \
     -v <path for media files>:/media \
@@ -25,9 +24,7 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-
     binhex/arch-plexpass
-
 ```
 
 Please replace all user variables in the above command defined by <> with the
@@ -41,7 +38,6 @@ correct values.
 
 ```bash
 docker run -d \
-
     --net="host" \
     --name=plex \
     -v /media/movies:/media \
@@ -50,9 +46,7 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-
     binhex/arch-plexpass
-
 ```
 
 ## Notes
@@ -62,7 +56,6 @@ for the user you want to run the container as:-
 
 ```bash
 id <username>
-
 ```
 
 You cannot specify the port the docker container uses, it requires full access
