@@ -38,4 +38,4 @@ HEALTHCHECK --interval=1m --timeout=3s \
 #################
 
 # run script to set uid, gid and permissions
-CMD ["/bin/bash", "/usr/local/bin/init.sh"]
+CMD ["/bin/bash", "init.sh"]
