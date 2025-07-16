@@ -36,7 +36,7 @@ HEALTHCHECK \
 	--timeout=30s \
 	--retries=5 \
 	--start-period=2m \
-  CMD /usr/local/bin/shell/docker/healthcheck.sh || exit 1
+  CMD /usr/local/bin/system/scripts/docker/healthcheck.sh || exit 1
 
 # set permissions
 #################
