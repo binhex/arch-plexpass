@@ -21,6 +21,8 @@ docker run -d \
     -v <path for media files>:/media \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
+    -e HEALTHCHECK_COMMAND=<command> \
+    -e HEALTHCHECK_ACTION=<action> \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
