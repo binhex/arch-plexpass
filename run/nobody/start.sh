@@ -1,5 +1,8 @@
 #!/usr/bin/dumb-init /bin/bash
 
+# source in script to wait for child processes to exit
+source waitproc.sh
+
 # config below is a consolidation of (original) bash script /usr/bin/plexmediaserver.sh and environment file /etc/conf.d/plexmediaserver
 
 # set env variables for plex
