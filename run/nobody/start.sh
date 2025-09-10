@@ -32,5 +32,16 @@ export LD_LIBRARY_PATH="${PLEX_MEDIA_SERVER_HOME}"
 # set home directory, this is where the library files are stored (auto created on run of Plex Media Server)
 export HOME='/config'
 
+# if PLEX_CLAIM set then edit Preferences before running pms
+# see https://support.plex.tv/articles/204281528-why-am-i-locked-out-of-server-settings-and-how-do-i-get-in/
+if [[ -n "${PLEX_CLAIM}" && "${CLAIM_SERVER}" == 'yes' ]]; then
+	sed -i -E 's~PlexOnlineMail="[^"]+"~PlexOnlineMail=""~g' '/config/Plex Media Server/Preferences.xml'
+	sed -i -E 's~PlexOnlineToken="[^"]+"~PlexOnlineToken=""~g' '/config/Plex Media Server/Preferences.xml'
+	sed -i -E 's~PlexOnlineUsername="[^"]+"~PlexOnlineUsername=""~g' '/config/Plex Media Server/Preferences.xml'
+	sed -i -E 's~PlexOnlineHome="[^"]+"~PlexOnlineHome=""~g' '/config/Plex Media Server/Preferences.xml'
+else
+	echo "[info] Env var 'PLEX_CLAIM' value not set and/or 'CLAIM_SERVER' not set to 'yes', skipping edit of Preferences.xml for claim process."
+fi
+
 # kick off main process
 "${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
