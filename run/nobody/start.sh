@@ -43,5 +43,6 @@ else
 	echo "[info] Env var 'PLEX_CLAIM' value not set and/or 'CLAIM_SERVER' not set to 'yes', skipping edit of Preferences.xml for claim process."
 fi
 
-# kick off main process
+echo "[info] Starting Plex Media Server..."
 "${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
+echo "[info] Plex Media Server stopped"

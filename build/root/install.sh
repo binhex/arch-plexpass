@@ -51,14 +51,77 @@ if [[ -n "${pacman_packages}" ]]; then
 	pacman -S --needed $pacman_packages --noconfirm
 fi
 
+# custom install
+####
+
+# ── Paths (set these for your container layout) ─────────────────
+PLEX_HOME="${PLEX_HOME:-/usr/lib/plexmediaserver}"
+PLEX_DATA="${PLEX_DATA:-/var/lib/plex}"
+PLEX_TMP="${PLEX_TMP:-/tmp}"
+
+CHANNEL="${CHANNEL:-5}"   # 5 = Plex Pass, 1 = stable
+API_URL="https://plex.tv/api/downloads/${CHANNEL}.json"
+
+# ── 1. Fetch latest version from Plex API ───────────────────────
+echo "==> Fetching latest version from Plex API..."
+API_JSON="$(curl -sSfL "$API_URL")"
+
+VERSION_FULL="$(echo "$API_JSON" | jq -r '.computer.Linux.version')"
+
+VERSION="$(echo "$VERSION_FULL" | cut -d- -f1)"
+BUILD="$(echo "$VERSION_FULL" | cut -d- -f2)"
+
+echo "Latest Plex Pass: ${VERSION}-${BUILD}"
+
+# ── 2. Build download URL based on architecture ─────────────────
+ARCH="$(uname -m)"
+case "$ARCH" in
+  x86_64)
+    FILE="plexmediaserver-${VERSION}-${BUILD}.x86_64.rpm"
+    URL="https://downloads.plex.tv/plex-media-server-new/${VERSION}-${BUILD}/redhat/${FILE}"
+    ;;
+  aarch64|arm64)
+    FILE="plexmediaserver_${VERSION}-${BUILD}_arm64.deb"
+    URL="https://downloads.plex.tv/plex-media-server-new/${VERSION}-${BUILD}/debian/${FILE}"
+    ;;
+  armv7l|armhf)
+    FILE="plexmediaserver_${VERSION}-${BUILD}_armhf.deb"
+    URL="https://downloads.plex.tv/plex-media-server-new/${VERSION}-${BUILD}/debian/${FILE}"
+    ;;
+  *)
+    echo "ERROR: unsupported architecture: $ARCH"
+    exit 1
+    ;;
+esac
+
+# ── 3. Download ─────────────────────────────────────────────────
+WORKDIR="$(mktemp -d)"
+trap 'rm -rf "$WORKDIR"' EXIT
+
+echo "==> Downloading $URL"
+curl -fSL# -o "$WORKDIR/pkg" "$URL"
+
+# ── 4. Extract ──────────────────────────────────────────────────
+echo "==> Extracting"
+mkdir -p "$WORKDIR/root"
+bsdtar -xf "$WORKDIR/pkg" -C "$WORKDIR/root"
+
+# ── 5. Install binaries ─────────────────────────────────────────
+echo "==> Installing to $PLEX_HOME"
+install -d -m 755 "$PLEX_HOME"
+cp -dr --no-preserve=ownership "$WORKDIR/root/usr/lib/plexmediaserver/"* "$PLEX_HOME/"
+
+# ── 6. Create data directory ────────────────────────────────────
+install -d -m 755 "$PLEX_DATA"
+
 # aur packages
 ####
 
-# define aur packages
-aur_packages="plex-media-server-plexpass"
+# # define aur packages
+# aur_packages="plex-media-server-plexpass"
 
-# call aur install script (arch user repo)
-aur.sh --aur-package "${aur_packages}"
+# # call aur install script (arch user repo)
+# aur.sh --aur-package "${aur_packages}"
 
 # github
 ####
