@@ -59,7 +59,7 @@ PLEX_HOME="${PLEX_HOME:-/usr/lib/plexmediaserver}"
 PLEX_DATA="${PLEX_DATA:-/var/lib/plex}"
 PLEX_TMP="${PLEX_TMP:-/tmp}"
 
-CHANNEL="${CHANNEL:-5}"   # 5 = Plex Pass, 1 = stable
+CHANNEL="5"   # 5 = Plex Pass, 1 = stable
 API_URL="https://plex.tv/api/downloads/${CHANNEL}.json"
 
 # ── 1. Fetch latest version from Plex API ───────────────────────
