@@ -1,5 +1,7 @@
 #!/usr/bin/dumb-init /bin/bash
 
+plex_media_server_config_path='/config/Plex Media Server'
+
 # config below is a consolidation of (original) bash script /usr/bin/plexmediaserver.sh and environment file /etc/conf.d/plexmediaserver
 
 # set env variables for plex
@@ -32,16 +34,19 @@ export HOME='/config'
 # if PLEX_CLAIM set then edit Preferences before running pms
 # see https://support.plex.tv/articles/204281528-why-am-i-locked-out-of-server-settings-and-how-do-i-get-in/
 if [[ -n "${PLEX_CLAIM}" && "${CLAIM_SERVER}" == 'yes' ]]; then
-	sed -i -E 's~PlexOnlineMail="[^"]+"~PlexOnlineMail=""~g' '/config/Plex Media Server/Preferences.xml'
-	sed -i -E 's~PlexOnlineToken="[^"]+"~PlexOnlineToken=""~g' '/config/Plex Media Server/Preferences.xml'
-	sed -i -E 's~PlexOnlineUsername="[^"]+"~PlexOnlineUsername=""~g' '/config/Plex Media Server/Preferences.xml'
-	sed -i -E 's~PlexOnlineHome="[^"]+"~PlexOnlineHome=""~g' '/config/Plex Media Server/Preferences.xml'
+	sed -i -E 's~PlexOnlineMail="[^"]+"~PlexOnlineMail=""~g' "${plex_media_server_config_path}/Preferences.xml"
+	sed -i -E 's~PlexOnlineToken="[^"]+"~PlexOnlineToken=""~g' "${plex_media_server_config_path}/Preferences.xml"
+	sed -i -E 's~PlexOnlineUsername="[^"]+"~PlexOnlineUsername=""~g' "${plex_media_server_config_path}/Preferences.xml"
+	sed -i -E 's~PlexOnlineHome="[^"]+"~PlexOnlineHome=""~g' "${plex_media_server_config_path}/Preferences.xml"
 else
 	echo "[info] Env var 'PLEX_CLAIM' value not set and/or 'CLAIM_SERVER' not set to 'yes', skipping edit of Preferences.xml for claim process."
 fi
 
 echo "[INFO] Removing any existing Plex Media Server PID..."
-rm -f '/config/Plex Media Server/plexmediaserver.pid'
+rm -f "${plex_media_server_config_path}/plexmediaserver.pid"
+
+echo "[INFO] Ensure encoder binaries are executable..."
+chmod -R 775 "${plex_media_server_config_path}/Codecs/EasyAudioEncoder"*
 
 echo "[info] Starting Plex Media Server..."
 exec "${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
