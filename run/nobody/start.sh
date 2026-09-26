@@ -1,8 +1,5 @@
 #!/usr/bin/dumb-init /bin/bash
 
-# source in script to wait for child processes to exit
-source waitproc.sh
-
 # config below is a consolidation of (original) bash script /usr/bin/plexmediaserver.sh and environment file /etc/conf.d/plexmediaserver
 
 # set env variables for plex
@@ -43,6 +40,8 @@ else
 	echo "[info] Env var 'PLEX_CLAIM' value not set and/or 'CLAIM_SERVER' not set to 'yes', skipping edit of Preferences.xml for claim process."
 fi
 
+echo "[INFO] Removing any existing Plex Media Server PID..."
+rm -f '/config/Plex Media Server/plexmediaserver.pid'
+
 echo "[info] Starting Plex Media Server..."
-"${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
-echo "[info] Plex Media Server stopped"
+exec "${PLEX_MEDIA_SERVER_HOME}/Plex Media Server"
